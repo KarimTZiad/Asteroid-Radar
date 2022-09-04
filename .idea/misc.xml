@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Karim/AndroidStudioProjects/AsteroidRadar/app/src/main/res/drawable/border.xml" value="0.1" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/AsteroidRadar/app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.1785" />
+        <entry key="..\:/Users/Karim/AndroidStudioProjects/AsteroidRadar/app/src/main/res/drawable/ic_baseline_help_outline_24.xml" value="0.1785" />
         <entry key="..\:/Users/Karim/AndroidStudioProjects/AsteroidRadar/app/src/main/res/drawable/ic_status_normal.xml" value="0.1785" />
         <entry key="..\:/Users/Karim/AndroidStudioProjects/AsteroidRadar/app/src/main/res/drawable/ic_status_potentially_hazardous.xml" value="0.1785" />
         <entry key="..\:/Users/Karim/AndroidStudioProjects/AsteroidRadar/app/src/main/res/font/gotham.xml" value="0.20989583333333334" />

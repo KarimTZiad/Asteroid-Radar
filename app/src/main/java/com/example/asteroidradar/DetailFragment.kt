@@ -1,5 +1,7 @@
 package com.example.asteroidradar
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,7 +23,7 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -37,6 +39,19 @@ class DetailFragment : Fragment() {
                 binding.executePendingBindings()
             }
         })
+        binding.astronomicalUnitExplanationButton.setOnClickListener {
+            activity?.let {
+                // Use the Builder class for convenient dialog construction
+                val builder = AlertDialog.Builder(it)
+                builder.setMessage(R.string.astronomical_unit_explanation)
+                    .setPositiveButton(R.string.back,
+                        DialogInterface.OnClickListener { dialog, id ->
+                            dialog.dismiss()
+                        })
+                // Create the AlertDialog object and return it
+                builder.create().show()
+            } ?: throw IllegalStateException("Activity cannot be null")
+        }
     }
 
 }

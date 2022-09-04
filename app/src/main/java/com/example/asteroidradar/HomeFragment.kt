@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -44,12 +44,14 @@ class HomeFragment : Fragment() {
             }
         })
 
-        viewModel.pictureOfDay.observe(viewLifecycleOwner, Observer {pic ->
-            pic?.let {
-                Picasso.get().load(pic.url).into(binding.imageOfTheDay)
-                binding.imageOfTheDay.setOnClickListener {
-                    Toast.makeText(requireContext(), pic.title, Toast.LENGTH_LONG).show()
-                }
+        viewModel.pictureOfDay.observe(viewLifecycleOwner, Observer { pic ->
+            Picasso.get()
+                .load(pic?.url)
+                .placeholder(R.drawable.placeholder_image_of_day)
+                .error(R.drawable.ic_baseline_error_outline_128)
+                .into(binding.imageOfTheDay)
+            binding.imageOfTheDay.setOnClickListener {
+                    Toast.makeText(requireContext(), pic?.title ?: requireContext().getString(R.string.no_image_of_the_day), Toast.LENGTH_LONG).show()
             }
         })
     }

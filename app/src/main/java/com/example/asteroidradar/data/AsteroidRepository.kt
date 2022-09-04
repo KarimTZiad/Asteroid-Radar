@@ -33,7 +33,7 @@ class AsteroidRepository(private val asteroidDao:AsteroidDao) {
             try {
                 val result = NasaApi.retrofitService.getProperties(today,endDate,API_KEY)
                 asteroidDao.saveAllAsteroids(*parseAsteroidsJsonResult(JSONObject(result.string())).toTypedArray())
-                Log.i("test","Success")
+                Log.i("test","Success loading Asteroids")
             }
             catch (e : Exception){
                 Log.i("test", "Failed to load Asteroids: $e")
@@ -54,6 +54,7 @@ class AsteroidRepository(private val asteroidDao:AsteroidDao) {
             try{
                 val result = NasaApi.retrofitService.getImageOfDay(API_KEY)
                 asteroidDao.savePictureOfDay(result)
+                Log.i("test","Success loading Picture of the Day")
             }
             catch (e: Exception){
                 Log.i("test","Failed to load Picture of the Day: $e")

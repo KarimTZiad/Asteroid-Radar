@@ -22,7 +22,7 @@ interface AsteroidDao {
     @Query("DELETE FROM Asteroid WHERE(closeApproachDate < :today)")
     fun deleteOldAsteroids(today: String)
 
-    @Query("SELECT * FROM PictureOfDay WHERE(mediaType=='image') ORDER BY date LIMIT 1")
+    @Query("SELECT * FROM PictureOfDay WHERE(mediaType=='image') ORDER BY date DESC LIMIT 1")
     fun getPictureOfDay() : LiveData<PictureOfDay>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

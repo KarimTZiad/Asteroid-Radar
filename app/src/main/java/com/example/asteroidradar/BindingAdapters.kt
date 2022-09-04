@@ -64,7 +64,8 @@ fun bindImageViewHazardousImageContentDesc(imageView: ImageView, hazardous: Bool
 }
 
 @BindingAdapter("picOfDayContentDesc")
-fun bindImageViewPictureOfDayContentDesc(imageView: ImageView, title: String){
+fun bindImageViewPictureOfDayContentDesc(imageView: ImageView, title: String?){
     val context = imageView.context
-    imageView.contentDescription = context.getString(R.string.nasa_picture_of_day_content_description_format, title)
+    imageView.contentDescription = context.getString(R.string.nasa_picture_of_day_content_description_format,
+        title?:context.getString(R.string.no_image_of_the_day))
 }

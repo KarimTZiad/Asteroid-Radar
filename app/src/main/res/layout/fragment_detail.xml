@@ -144,6 +144,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/distanceFromEarthTextView"
                 tools:text="0.45 au"/>
+
+            <ImageButton
+                android:id="@+id/astronomicalUnitExplanationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/astronomical_unit_explanation_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/absoluteMagnitudeTextView"
+                android:background="@drawable/ic_baseline_help_outline_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

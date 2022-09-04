@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
@@ -14,11 +14,15 @@
         tools:context=".HomeFragment"
         android:orientation="vertical">
 
+        <!-- contentDescription added dynamically through a binding adapter -->
         <ImageView
             android:id="@+id/imageOfTheDay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
+            picOfDayContentDesc="@{viewModel.pictureOfDay.title}"
             tools:src="@drawable/asteroid_hazardous" />
 
         <androidx.recyclerview.widget.RecyclerView

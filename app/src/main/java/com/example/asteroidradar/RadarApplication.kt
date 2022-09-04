@@ -18,6 +18,7 @@ class RadarApplication : Application() {
             val constraints = Constraints.Builder()
                 .setRequiresCharging(true)
                 .setRequiredNetworkType(NetworkType.UNMETERED)
+                .setRequiresBatteryNotLow(true)
                 .build()
 
             val request = PeriodicWorkRequestBuilder<RefreshDataWorker>(

@@ -17,8 +17,7 @@ import kotlin.collections.ArrayList
 const val DEFAULT_END_DATE_DAYS = 7
 const val API_QUERY_DATE_FORMAT = "yyyy-MM-dd"
 const val BASE_URL = "https://api.nasa.gov/"
-// TODO Add your api key here
-const val API_KEY = "YOUR API KEY HERE"
+const val API_KEY = BuildConfig.NASA_API_KEY
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -48,7 +47,7 @@ object NasaApi {
 }
 
 
-public fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
+fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
 
     val asteroidList = ArrayList<Asteroid>()
