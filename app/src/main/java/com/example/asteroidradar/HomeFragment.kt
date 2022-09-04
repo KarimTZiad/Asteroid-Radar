@@ -1,13 +1,12 @@
 package com.example.asteroidradar
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.asteroidradar.databinding.FragmentHomeBinding
@@ -17,6 +16,7 @@ import com.squareup.picasso.Picasso
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
+    private lateinit var viewModel : HomeFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,12 +24,39 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+        when(item.itemId){
+            R.id.viewWeekAsteroidsMenuItem -> {
+                viewModel.getWeekAsteroids()
+            }
+
+            R.id.viewTodayAsteroidsMenuItem -> {
+                viewModel.getTodayAsteroids()
+            }
+
+            R.id.viewSavedAsteroidsMenuItem -> {
+                viewModel.getAllAsteroids()
+            }
+
+            android.R.id.home ->
+                navController.navigateUp()
+        }
+        return true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider(this)[HomeFragmentViewModel::class.java]
+        viewModel = ViewModelProvider(this)[HomeFragmentViewModel::class.java]
         binding.viewModel = viewModel
 
         val adapter = AsteroidAdapter(AsteroidAdapter.DetailsClickListener {
@@ -38,7 +65,7 @@ class HomeFragment : Fragment() {
         binding.asteroidRecyclerView.adapter = adapter
         binding.asteroidRecyclerView.layoutManager = LinearLayoutManager(activity)
 
-        viewModel.readAllAsteroids.observe(viewLifecycleOwner, Observer {
+        viewModel.currentlySelectedAsteroids.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }

@@ -20,6 +20,26 @@ class AsteroidRepository(private val asteroidDao:AsteroidDao) {
 
     val getPictureOfDay = asteroidDao.getPictureOfDay()
 
+    fun getWeekAsteroids() : LiveData<List<Asteroid>>{
+        val calendar = Calendar.getInstance()
+        val today = SimpleDateFormat(API_QUERY_DATE_FORMAT, Locale.getDefault()).format(
+            calendar.time
+        )
+        calendar.add(Calendar.DAY_OF_YEAR, DEFAULT_END_DATE_DAYS)
+        val endDate = SimpleDateFormat(API_QUERY_DATE_FORMAT, Locale.getDefault()).format(
+            calendar.time
+        )
+        return asteroidDao.getWeekAsteroids(today, endDate)
+    }
+
+    fun getTodayAsteroids() : LiveData<List<Asteroid>>{
+        val calendar = Calendar.getInstance()
+        val today = SimpleDateFormat(API_QUERY_DATE_FORMAT, Locale.getDefault()).format(
+            calendar.time
+        )
+        return asteroidDao.getTodayAsteroids(today)
+    }
+
     suspend fun refreshAsteroids(){
         val calendar = Calendar.getInstance()
         val today = SimpleDateFormat(API_QUERY_DATE_FORMAT, Locale.getDefault()).format(
